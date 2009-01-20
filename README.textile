@@ -1,0 +1,17 @@
+Dependencies
+============
+
+A port of Merb's dependency system to a Rails plugin.
+
+
+Example
+=======
+
+Create a config/dependencies.rb file that looks like:
+
+dependency 'gem'
+dependency 'gem', '1.0.1'
+dependency 'gem', :require_as => 'Gem'
+
+
+Copyright (c) 2009 David Dollar, released under the MIT license
