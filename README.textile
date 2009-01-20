@@ -13,6 +13,9 @@ Create a config/dependencies.rb file that looks like:
     dependency 'gem', '1.0.1'
     dependency 'gem', :require_as => 'Gem'
 
+Install the gems into your project and keep them up to date using:
+
+    rake dependencies:sync
 
 Ownership
 =========
