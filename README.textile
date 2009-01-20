@@ -9,9 +9,12 @@ Example
 
 Create a config/dependencies.rb file that looks like:
 
-dependency 'gem'
-dependency 'gem', '1.0.1'
-dependency 'gem', :require_as => 'Gem'
+    dependency 'gem'
+    dependency 'gem', '1.0.1'
+    dependency 'gem', :require_as => 'Gem'
 
+
+Ownership
+=========
 
 Copyright (c) 2009 David Dollar, released under the MIT license
