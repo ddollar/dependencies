@@ -16,9 +16,8 @@ class Dependencies::Reader
     @dependencies = []
   end
 
-  def dependency(name, *versions)
-    versions.pop if versions.last.is_a?(Hash)
-    @dependencies << [name, versions]
+  def dependency(name, *options)
+    @dependencies << ::Dependencies::Dependency.new(name, *options)
   end
 
 end

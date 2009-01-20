@@ -45,16 +45,16 @@ namespace :dependencies do
     begin
       repo = Dependencies::Repository.new(SETTINGS[:gem_dir])
 
-      SETTINGS[:dependencies].each do |name, versions|
-        gem = repo.gem(name, versions)
+      SETTINGS[:dependencies].each do |dep|
+        gem = repo.gem(dep.name, dep.versions)
         next unless repo.search(gem).empty?
         repo.install(gem)
       end
 
       repo.reload_index!
 
-      full_list = SETTINGS[:dependencies].map do |name, versions|
-        gem = repo.gem(name, versions)
+      full_list = SETTINGS[:dependencies].map do |dep|
+        gem = repo.gem(dep.name, dep.versions)
         spec = repo.index.search(gem).last
         unless spec
           puts "A required dependency #{gem} was not found"
