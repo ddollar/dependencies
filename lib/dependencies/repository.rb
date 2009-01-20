@@ -9,8 +9,6 @@ class Dependencies::Repository
   end
 
   def index
-    require 'pp'
-    pp @paths
     @index ||= reload_index!
   end
 
@@ -40,14 +38,24 @@ class Dependencies::Repository
     rescue ::Gem::GemNotFoundException => e
       puts "Cannot find #{dep}"
     rescue ::Gem::RemoteFetcher::FetchError => e
-      puts e.message
-      puts "Retrying..."
+      puts "Problem with fetch, retrying..."
       retry
     end
   end
 
+  def uninstall(name, version)
+    uninstaller = ::Gem::Uninstaller.new(name,
+      :version => version,
+      :bin_dir => @paths[:bin],
+      :install_dir => @paths[:gems],
+      :ignore => true,
+      :executables => true
+    )
+    uninstaller.uninstall
+  end
+  
   def installed
-    Dir[File.join(@paths[:gems], '*')].map! { |n| File.basename(n) }
+    Dir[File.join(@paths[:gems], 'gems', '*')].map! { |n| File.basename(n) }
   end
 
   def gems
