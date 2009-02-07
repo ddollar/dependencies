@@ -36,7 +36,7 @@ class Dependencies::Repository
     begin
       installer.install gem.name, gem.version_requirements
     rescue ::Gem::GemNotFoundException => e
-      puts "Cannot find #{dep}"
+      puts "Cannot find #{gem.name} #{gem.version_requirements}"
     rescue ::Gem::RemoteFetcher::FetchError => e
       puts "Problem with fetch, retrying..."
       retry
