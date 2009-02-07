@@ -4,5 +4,9 @@ deps = ::Dependencies::Reader.read_file(File.join(Rails.root, 'config', 'depende
 
 deps.each do |dep|
   require_as = dep.options[:require_as] || dep.name
-  require require_as
+  begin
+    require require_as
+  rescue LoadError
+    puts "was unable to require #{dep.name} as '#{require_as}'"
+  end
 end
