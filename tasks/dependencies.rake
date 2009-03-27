@@ -11,6 +11,7 @@ namespace :dependencies do
       :dependencies_file => File.join(Rails.root, 'config', 'dependencies.rb'),
       :gem_dir           => File.join(Rails.root, 'gems')
     }
+    FileUtils.mkdir(SETTINGS[:gem_dir]) unless File.exists?(SETTINGS[:gem_dir])
   end
 
   task :load => :setup do
