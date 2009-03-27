@@ -12,6 +12,7 @@ Create a config/dependencies.rb file that looks like:
     dependency 'gem'
     dependency 'gem', '1.0.1'
     dependency 'gem', :require_as => 'Gem'
+    dependency 'gem', :env => %w(test staging)
 
 Install the gems into your project and keep them up to date using:
 
@@ -21,3 +22,4 @@ Ownership
 =========
 
 Copyright (c) 2009 David Dollar, released under the MIT license
+Much of the Rubygems monkey-patching was lifted near-verbatim from Merb.
