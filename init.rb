@@ -11,7 +11,7 @@ deps.each do |dep|
     :require_as => dep.name
   }.merge(dep.options)
 
-  # swap their :only and :except to an array if they used a string
+  # swap their :only and :except to an array if they used a not-Array
   [ :only, :except ].each do |option|
     options[option] = [options[option].to_s] unless options[option].is_a?(Array)
   end
