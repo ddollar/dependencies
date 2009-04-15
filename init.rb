@@ -28,6 +28,6 @@ deps.each do |dep|
   begin
     require options[:require_as]
   rescue LoadError
-    puts "was unable to require #{dep.name} as '#{require_as}'"
+    puts "was unable to require #{dep.name} as '#{options[:require_as]}'"
   end
 end
