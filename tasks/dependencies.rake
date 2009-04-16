@@ -4,6 +4,9 @@ require "rubygems/dependency_installer"
 require "rubygems/uninstaller"
 require "fileutils"
 
+Gem.clear_paths
+Gem.path.unshift(File.join(RAILS_ROOT, 'gems'))
+
 namespace :dependencies do
 
   task :setup => :environment do
