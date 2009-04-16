@@ -1,7 +1,7 @@
 Dependencies
 ============
 
-> A port of Merb's dependency system to a Rails plugin.
+A port of Merb's dependency system to a Rails plugin.
 
 Usage
 =====
@@ -40,7 +40,7 @@ To Do List
 Ownership
 =========
 
-> Copyright (c) 2009 David Dollar, released under the MIT license
-> Much of the Rubygems monkey-patching was lifted near-verbatim from Merb.
+Copyright (c) 2009 David Dollar, released under the MIT license
+Much of the Rubygems monkey-patching was lifted near-verbatim from Merb.
 
-> Thanks to Steven Soroka for testing, documentation, and ideas.
+Thanks to Steven Soroka for testing, documentation, and ideas.
