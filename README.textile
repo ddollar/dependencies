@@ -16,11 +16,11 @@ uncomment or add/modify this line, so that the dependencies plugin is loaded bef
 
 3. Add gems/* to your .gitignore
 
-4. Create a config/dependencies.rb file that looks like:
+4. Create a config/dependencies.rb file that looks something like:
 
     dependency 'gem'
-    dependency 'gem', '1.0.1'
-    dependency 'gem', :require_as => 'Gem'
+    dependency 'gem', '1.0.1' # use a specific version
+    dependency 'gem', :require_as => 'Gem' # specify what to pass the "require" keyword (use nil to avoid require!)
     dependency 'gem', :only => %w(test staging)
     dependency 'gem', :except => 'production'
 
@@ -34,6 +34,7 @@ To Do List
 ==========
 
 * What about gems that depend on rails to load?
+* fix GEM_PATH issue.
 * with_options should support rails-style compatibility, even if the shortened version is nicer
 
 Rails style:
