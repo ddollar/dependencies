@@ -34,6 +34,13 @@ uncomment or add/modify this line, so that the dependencies plugin is loaded bef
 
     rake dependencies:sync
 
+Notes
+=====
+
+* For RSpec, use
+
+    dependency 'rspec', :require_as => false
+
 To Do List
 ==========
 
