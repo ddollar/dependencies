@@ -8,6 +8,8 @@ Usage
 
 1. Install the plugin
 
+        script/plugin install git://github.com/ddollar/dependencies.git
+
 2. Add the following line to your config/environment.rb
 
         config.plugins = [:dependencies, :all]
