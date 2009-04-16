@@ -24,34 +24,24 @@ uncomment or add/modify this line, so that the dependencies plugin is loaded bef
     dependency 'gem', :only => %w(test staging)
     dependency 'gem', :except => 'production'
 
+    with_options(:only => 'test') do |test|
+      test.dependency 'tester-gem'
+    end
+
 5. Remove or comment out any config.gem lines from config/environment.rb or config/environments/*.rb
 
 6. Install the gems into your project and keep them up to date using:
 
-        rake dependencies:sync
+    rake dependencies:sync
 
 To Do List
 ==========
 
 * What about gems that depend on rails to load?
-* with_options should support rails-style compatibility, even if the shortened version is nicer
-
-Rails style:
-
-    with_options(:only => 'production') do |production|
-      production.dependency 'fiveruns_manage'
-      production.dependency 'slim-attributes'
-    end
-
-Short style:
-
-    with_options(:only => 'production') do
-      dependency 'fiveruns_manage'
-      dependency 'slim-attributes'
-    end
 
 Ownership
 =========
 
 Copyright (c) 2009 David Dollar, released under the MIT license
 Much of the Rubygems monkey-patching was lifted near-verbatim from Merb.
+Thanks to Steven Soroka for testing, documentation, and ideas.
