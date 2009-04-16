@@ -1,5 +1,8 @@
 require File.join(File.dirname(__FILE__), 'lib', 'dependencies')
 
+Gem.clear_paths
+Gem.path.unshift(File.join(Rails.root, 'gems'))
+
 deps = ::Dependencies::Reader.read_file(File.join(Rails.root, 'config', 'dependencies.rb'))
 
 deps.each do |dep|
