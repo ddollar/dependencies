@@ -44,7 +44,8 @@ class ::Gem::Uninstaller
         :version => "#{op} #{version}",
         :install_dir => Dir.pwd / "gems",
         :all => true,
-        :ignore => true
+        :ignore => true,
+        :executables => true
       )
       _with_silent_ui { uninstaller.uninstall }
     end
