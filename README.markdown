@@ -14,7 +14,7 @@ Usage
 
         config.plugins = [:dependencies, :all]
 
-3. Add gems/* to your .gitignore
+3. Add gems to your .gitignore
 
 4. Create a config/dependencies.rb file that looks like:
 
