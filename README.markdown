@@ -46,6 +46,6 @@ About
 
 Initial idea and Rubygems extension code from [Merb](http://merbivore.com/)
 
-Rewritten for Rails by David Dollar ([@ddollar](http://twitter.com/ddollar))
+Rewritten for Rails by [David Dollar](http://daviddollar.org) ([@ddollar](http://twitter.com/ddollar))
 
 Documentation, testing, ideas by Steven Soroka ([@ssoroka](http://twitter.com/ssoroka))
