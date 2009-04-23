@@ -14,7 +14,9 @@ Usage
 
         config.plugins = [:dependencies, :all]
 
-3. Add gems to your .gitignore
+3. Add the following line to your .gitignore
+
+        gems
 
 4. Create a config/dependencies.rb file that looks like:
 
@@ -39,10 +41,11 @@ To Do List
 
 * What about gems that depend on rails to load?
 
-Ownership
-=========
+About
+=====
 
-Copyright (c) 2009 David Dollar, released under the MIT license
-Much of the Rubygems monkey-patching was lifted near-verbatim from Merb.
+Initial idea and Rubygems extension code from [Merb](http://merbivore.com/)
 
-Thanks to Steven Soroka for testing, documentation, and ideas.
+Rewritten for Rails by David Dollar ([@ddollar](http://twitter.com/ddollar))
+
+Documentation, testing, ideas by Steven Soroka ([@ssoroka](http://twitter.com/ssoroka))
