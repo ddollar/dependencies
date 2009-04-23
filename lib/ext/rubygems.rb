@@ -114,7 +114,7 @@ class ::Gem::Specification
     specs = self.runtime_dependencies.map do |dep|
       spec = index.search(dep).last
       unless spec
-        raise "Needed #{dep} for #{from_name}, but could not find it"
+        raise "Needed #{dep} for #{from}, but could not find it"
       end
       spec
     end
