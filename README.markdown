@@ -36,11 +36,6 @@ Usage
 
         rake dependencies:sync
 
-To Do List
-==========
-
-* What about gems that depend on rails to load?
-
 About
 =====
 
