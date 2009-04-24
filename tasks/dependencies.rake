@@ -63,7 +63,7 @@ namespace :dependencies do
         gem = repo.gem(dep.name, dep.versions)
         spec = repo.index.search(gem).last
         unless spec
-          Rake::Task['dependencies:transaction:rollback'].invoke
+          # Rake::Task['dependencies:transaction:rollback'].invoke # gets run on rescue below.
           raise Exception.new("A required dependency #{gem} was not found")
         end
         deps = spec.recursive_dependencies(gem, repo.index)
