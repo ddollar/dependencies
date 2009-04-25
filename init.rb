@@ -30,7 +30,8 @@ deps.each do |dep|
 
   begin
     require options[:require_as]
-  rescue LoadError
-    puts "was unable to require #{dep.name} as '#{options[:require_as]}'"
+  rescue LoadError => e
+    puts "was unable to require #{dep.name} as '#{options[:require_as]}'
+    Reason: #{e.class.name} error raised with message: #{e.message}"
   end
 end

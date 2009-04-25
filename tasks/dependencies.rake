@@ -9,10 +9,16 @@ Gem.path.unshift(File.join(RAILS_ROOT, 'gems'))
 
 namespace :dependencies do
 
-  task :setup => :environment do
+  task :setup do
+    # avoid requiring environment by working up from vendor/plugins/dependencies/tasks
+    rails_root = File.expand_path(File.join(File.dirname(__FILE__), %w(.. .. .. ..)))
+
+    # Dependencies isn't loaded when running from rake.  This is a good place to load it.
+    require File.expand_path(File.join(File.dirname(__FILE__), %w(.. lib dependencies))) unless defined?(Dependencies)
+
     SETTINGS = {
-      :dependencies_file => File.join(Rails.root, 'config', 'dependencies.rb'),
-      :gem_dir           => File.join(Rails.root, 'gems')
+      :dependencies_file => File.join(rails_root, 'config', 'dependencies.rb'),
+      :gem_dir           => File.join(rails_root, 'gems')
     }
     FileUtils.mkdir(SETTINGS[:gem_dir]) unless File.exists?(SETTINGS[:gem_dir])
   end
@@ -61,8 +67,8 @@ namespace :dependencies do
         gem = repo.gem(dep.name, dep.versions)
         spec = repo.index.search(gem).last
         unless spec
-          puts "A required dependency #{gem} was not found"
-          Rake::Task['dependencies:transaction:rollback'].invoke
+          # Rake::Task['dependencies:transaction:rollback'].invoke # gets run on rescue below.
+          raise Exception.new("A required dependency #{gem} was not found")
         end
         deps = spec.recursive_dependencies(gem, repo.index)
         [spec] + deps

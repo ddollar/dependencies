@@ -80,7 +80,8 @@ end
 
 class ::Gem::SpecFetcher
   alias old_fetch fetch
-  def fetch(dependency, all = false, matching_platform = true)
+  def fetch(*args) # in rubygems 1.3.2 fetch takes 4 parameters
+    dependency, all, matching_platform, prerelease = *args
     idx = Gem::SourceIndex.from_installed_gems
 
     reqs = dependency.version_requirements.requirements
@@ -96,7 +97,7 @@ class ::Gem::SpecFetcher
       spec = ::Gem::Format.from_file_by_path(file).spec
       [[spec, file]]
     else
-      old_fetch(dependency, all, matching_platform)
+      old_fetch(*args)
     end
   end
 end
@@ -114,7 +115,7 @@ class ::Gem::Specification
     specs = self.runtime_dependencies.map do |dep|
       spec = index.search(dep).last
       unless spec
-        raise "Needed #{dep} for #{from_name}, but could not find it"
+        raise "Needed #{dep} for #{from}, but could not find it"
       end
       spec
     end
