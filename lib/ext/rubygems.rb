@@ -3,9 +3,10 @@ require 'rubygems'
 require 'rubygems/dependency_installer'
 
 Gem.pre_install_hooks.push(proc do |installer|
-  unless File.file?(installer.bin_dir / "common.rb")
+  unless File.file?(File.join(installer.bin_dir, "common.rb"))
     FileUtils.mkdir_p(installer.bin_dir)
-    FileUtils.cp(File.dirname(__FILE__) / "common.rb", installer.bin_dir / "common.rb")
+    FileUtils.cp(File.join(File.dirname(__FILE__), "common.rb"),
+                 File.join(installer.bin_dir,      "common.rb"))
   end
 
   name = installer.spec.name
@@ -104,7 +105,7 @@ end
 
 class ::Gem::Installer
   def app_script_text(bin_file_name)
-    template = File.read(File.dirname(__FILE__) / '..' / 'template' / "app_script.rb")
+    template = File.read(File.join(File.dirname(__FILE__), '..', 'template' , "app_script.rb"))
     erb = ERB.new(template)
     erb.result(binding)
   end
