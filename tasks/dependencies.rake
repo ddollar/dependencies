@@ -75,7 +75,7 @@ namespace :dependencies do
       end.flatten.uniq.map do |spec|
         "#{spec.name}-#{spec.version}"
       end
-      
+
       (repo.installed - full_list).each do |g|
         /^(.*)\-(.*)$/ =~ g
         repo.uninstall($1, $2)
