@@ -91,4 +91,71 @@ namespace :dependencies do
       Rake::Task['dependencies:transaction:rollback'].invoke
     end
   end
+
+  desc 'Build a dependencies.rb from old config.gem style declarations'
+  task :import do
+
+    # gross
+    $block_dependencies_plugin_init = true
+    $gems_rake_task                 = true
+    $gems_build_rake_task           = true
+
+    Rake::Task['environment'].invoke
+    environments = ActiveRecord::Base.configurations.keys
+
+    gems = environments.inject({}) do |memo, environment|
+      begin
+        ENV['RAILS_ENV'] = environment
+        RAILS_ENV = environment
+        load '/Users/ddollar/Code/RailsApp/config/environment.rb'
+      rescue
+        puts 'Temp Error Message'
+        exit 1
+      end
+
+      Rails.configuration.gems.each do |gem|
+        signature = [gem.name, gem.requirement.to_s]
+        memo[signature] ||= {
+          :name         => gem.name,
+          :version      => gem.requirement.to_s,
+          :require_as   => gem.lib,
+          :environments => []
+        }
+        memo[signature][:environments] << environment
+      end
+
+      memo
+    end
+
+    all_environments, some_environments = gems.values.partition do |gem|
+      gem[:environments].sort == environments.sort
+    end
+
+    all_environments.each do |gem|
+      puts dependency_declaration_from_hash(gem)
+    end
+
+    environments.each do |environment|
+      gems = some_environments.select do |gem|
+        gem[:environments].include?(environment)
+      end
+
+      unless gems.length.zero?
+        puts
+        puts "with_options(:only => '#{environment}') do |#{environment}|"
+        gems.each do |gem|
+          puts "  #{environment}." + dependency_declaration_from_hash(gem)
+        end
+        puts 'end'
+      end
+    end
+  end
+end
+
+def dependency_declaration_from_hash(gem)
+  declaration  = []
+  declaration << "dependency '#{gem[:name]}'"
+  declaration << "'#{gem[:version]}'"            unless gem[:version].blank?
+  declaration << ":require_as => '#{gem[:lib]}'" unless gem[:lib] == nil
+  declaration.join(', ')
 end
