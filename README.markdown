@@ -36,6 +36,11 @@ Usage
 
         rake dependencies:sync
 
+7. Alternatively you can use the following rake task to read your existing config.gem declarations and output a file suitable for this plugin. This task will appropriately handle any gems that you are currently loading on a per-environment basis as well.
+
+        rake dependencies:import
+
+
 About
 =====
 
