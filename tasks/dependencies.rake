@@ -107,9 +107,9 @@ namespace :dependencies do
       begin
         ENV['RAILS_ENV'] = environment
         RAILS_ENV = environment
-      rescue
-        puts 'Temp Error Message'
         load File.join(RAILS_ROOT, 'config', 'environment.rb')
+      rescue StandardError => ex
+        puts "Something went wrong: #{ex.message}"
         exit 1
       end
 
