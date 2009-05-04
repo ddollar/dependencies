@@ -107,9 +107,9 @@ namespace :dependencies do
       begin
         ENV['RAILS_ENV'] = environment
         RAILS_ENV = environment
-        load '/Users/ddollar/Code/RailsApp/config/environment.rb'
       rescue
         puts 'Temp Error Message'
+        load File.join(RAILS_ROOT, 'config', 'environment.rb')
         exit 1
       end
 
