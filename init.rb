@@ -1,6 +1,6 @@
-require File.join(File.dirname(__FILE__), 'lib', 'dependencies')
-
 unless $block_dependencies_plugin_init
+
+  require File.join(File.dirname(__FILE__), 'lib', 'dependencies')
 
   Gem.clear_paths
   Gem.path.unshift(File.join(Rails.root, 'gems'))
