@@ -101,7 +101,7 @@ namespace :dependencies do
     $gems_build_rake_task           = true
 
     Rake::Task['environment'].invoke
-    environments = ActiveRecord::Base.configurations.keys
+    environments = %w( development test production )
 
     gems = environments.inject({}) do |memo, environment|
       begin
