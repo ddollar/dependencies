@@ -1,3 +1,6 @@
+require 'active_support/core_ext/hash/deep_merge'
+require 'active_support/option_merger'
+
 class Dependencies::Reader
 
   attr_reader :dependencies
@@ -18,6 +21,10 @@ class Dependencies::Reader
 
   def dependency(name, *options)
     @dependencies << ::Dependencies::Dependency.new(name, *options)
+  end
+
+  def with_options(options)
+    yield ActiveSupport::OptionMerger.new(self, options)
   end
 
 end
