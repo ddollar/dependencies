@@ -4,8 +4,11 @@ require "rubygems/dependency_installer"
 require "rubygems/uninstaller"
 require "fileutils"
 
-Gem.clear_paths
-Gem.path.unshift(File.join(RAILS_ROOT, 'gems'))
+# there has got to be a better way to do this
+unless ARGV.first == 'dependencies:import'
+  Gem.clear_paths
+  Gem.path.unshift(File.join(RAILS_ROOT, 'gems'))
+end
 
 namespace :dependencies do
 
